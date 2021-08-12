@@ -183,6 +183,27 @@ end
 ```
 
 - **Story**: As the consumer of the API I can update an animal sighting in the database.
+
+added two new actions:
+
+```ruby
+  def update
+    sighting = Sighting.find(params[:id])
+    if sighting.update(sighting_params)
+      render json: sighting
+    else
+      render json: sighting.errors.full_messages
+    end
+  end
+
+  def destroy
+    sighting = Sighting.find(params[:id])
+    sighting.destroy
+    head :no_content
+  end
+
+```
+
 - **Story**: As the consumer of the API I can destroy an animal sighting in the database.
 - **Story**: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
   - _Hint_: Checkout the [ Ruby on Rails API docs ](https://api.rubyonrails.org/classes/ActiveModel/Serializers/JSON.html#method-i-as_json) on how to include associations.
