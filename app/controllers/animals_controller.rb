@@ -11,6 +11,12 @@ class AnimalsController < ApplicationController
 
 
   def create
+    animal = Animal.new(animal_params)
+    if animal.save 
+      render json: animal 
+    else
+      render animal.errors.full_messages
+    end
   end
 
   def update
@@ -19,7 +25,7 @@ class AnimalsController < ApplicationController
     if animal.update(animal_params)
       render json: animal
     else
-      render json: animal.errors.full_message
+      render json: animal.errors.full_messages
     end
   end
 
