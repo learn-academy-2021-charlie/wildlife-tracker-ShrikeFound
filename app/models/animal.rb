@@ -4,8 +4,8 @@ class Animal < ApplicationRecord
   #validate using custom method
   validate :common_name_cannot_match_latin_name
 
-  validates :common_name, presence: true
-  validates :latin_name, presence: true
+  validates :common_name, presence: true, uniqueness: true
+  validates :latin_name, presence: true, uniqueness: true
 
 
 

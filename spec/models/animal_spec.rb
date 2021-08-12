@@ -44,6 +44,40 @@ RSpec.describe Animal, type: :model do
 
   end
 
+  it 'is invalid if common name is not unique' do
+    test_animal = Animal.create({
+      common_name: "Banana Slug",
+      latin_name: "Ariolimax californicus",
+      animal_class: "gastropod"
+    })
+
+    test_animal_2 = Animal.create({
+    common_name: "Banana Slug",
+    latin_name: "Coccinella magnifica",
+    animal_class: "insect"
+    })
+
+    expect(test_animal_2.errors[:common_name]).to_not be_empty
+
+  end
+
+
+  it 'is invalid if latin name is not unique' do
+    test_animal = Animal.create({
+      common_name: "Banana Slug",
+      latin_name: "Ariolimax californicus",
+      animal_class: "gastropod"
+    })
+
+    test_animal_2 = Animal.create({
+    common_name: "Ladybird Beetle",
+    latin_name: "Ariolimax californicus",
+    animal_class: "insect"
+    })
+
+    expect(test_animal_2.errors[:latin_name]).to_not be_empty
+
+  end
 
 
 
