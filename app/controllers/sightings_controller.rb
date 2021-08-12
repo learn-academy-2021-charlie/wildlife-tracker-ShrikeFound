@@ -20,6 +20,15 @@ class SightingsController < ApplicationController
     end
   end
 
+  def update 
+    sighting = Sighting.find(params[:id])
+    if sighting.update(sighting_params)
+      render json: sighting 
+    else
+      render json: sighting.errors.full_messages
+    end
+  end
+
   def destroy
     sighting = Sighting.find(params[:id])
     sighting.destroy
