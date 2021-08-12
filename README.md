@@ -207,6 +207,16 @@ added two new actions:
 - **Story**: As the consumer of the API I can destroy an animal sighting in the database.
 - **Story**: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
   - _Hint_: Checkout the [ Ruby on Rails API docs ](https://api.rubyonrails.org/classes/ActiveModel/Serializers/JSON.html#method-i-as_json) on how to include associations.
+
+updated the animal controller's show method to:
+
+```ruby
+def show
+  animal = Animal.find(params[:id])
+  render json: animal.as_json(include: :sightings)
+end
+```
+
 - **Story**: As the consumer of the API, I can run a report to list all sightings during a given time period.
   - _Hint_: Your controller can look like this:
 
@@ -218,6 +228,20 @@ class SightingsController < ApplicationController
   end
 end
 ```
+
+ended up doing this:
+
+```ruby
+def index
+  start_date = params[:start_date].to_date || Date.today.at_beginning_of_month
+  end_date   = params[:end_date].to_date ||  Date.today.at_beginning_of_month.next_month
+
+  sightings = Sighting.where(date: start_date..end_date)
+  render json: sightings
+end
+```
+
+with the default date range limited to our current month if no params are passed. needed to convert the params to dates in case some the date was incomplete. unsure how to add these to strong parameters.
 
 Remember to add the start_date and end_date to what is permitted in your strong parameters method.
 
