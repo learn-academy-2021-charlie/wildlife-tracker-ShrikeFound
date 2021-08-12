@@ -151,6 +151,37 @@ class Sighting < ApplicationRecord
 end
 ```
 
+my controller so far:
+
+```ruby
+class SightingsController < ApplicationController
+  #so that I can see all the created sightings
+  def index
+    sightings = Sighting.all
+    render json: sightings
+  end
+
+
+  #I feel like there's a better way to do this but I'll need to look a bit more.
+  def create
+    sighting = Sighting.new(sighting_params)
+    if sighting.save
+      render json: sighting
+    else
+      render json: sighting.errors.full_messages
+    end
+  end
+
+
+  private
+  def sighting_params
+    params.require(:sighting).permit(:latitude,:longitude,:animal_id)
+  end
+end
+
+
+```
+
 - **Story**: As the consumer of the API I can update an animal sighting in the database.
 - **Story**: As the consumer of the API I can destroy an animal sighting in the database.
 - **Story**: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
