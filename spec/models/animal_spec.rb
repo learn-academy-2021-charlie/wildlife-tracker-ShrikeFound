@@ -33,15 +33,16 @@ RSpec.describe Animal, type: :model do
   end
 
 
-  # it 'is invalid without a latin name' do
-  #   test_animal = Animal.create({
-  #     common_name: "Banana Slug",
-  #     animal_class: "gastropod"
-  #   })
+  it 'is invalid if latin name and common name match' do
+    test_animal = Animal.create({
+      common_name: "Banana Slug",
+      latin_name: "Banana Slug",
+      animal_class: "gastropod"
+    })
 
-  #   expect(test_animal.errors[:latin_name]).to_not be_empty
+    expect(test_animal.errors[:latin_name]).to_not be_empty
 
-  # end
+  end
 
 
 
