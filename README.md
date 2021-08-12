@@ -58,6 +58,31 @@ def index
 ```
 
 - **Story**: As the consumer of the API I can update an animal in the database.
+
+in animals_controller.rb:
+
+```ruby
+def update
+    #this is for the PUT/PATCH 'animals/"id' route
+    animal = Animal.find(params[:id])
+    if animal.update(animal_params)
+      render json: animal
+    else
+      render json: animal.errors.full_message
+    end
+  end
+
+```
+
+in order for rails to accept it we need to tell it not to check for an authenticity token. in the application_controller:
+
+```ruby
+class ApplicationController < ActionController::Base
+  skip_before_action :verify_authenticity_token
+end
+
+```
+
 - **Story**: As the consumer of the API I can destroy an animal in the database.
 - **Story**: As the consumer of the API I can create a new animal in the database.
 - **Story**: As the consumer of the API I can create a sighting of an animal with date (use the _datetime_ datatype), a latitude, and a longitude.
