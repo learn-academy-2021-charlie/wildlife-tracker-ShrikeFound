@@ -4,42 +4,59 @@ The Forest Service is considering a proposal to place in conservancy a forest of
 
 - **Story**: As a developer I can create an animal model in the database. An animal has the following information: common name, latin name, kingdom (mammal, insect, etc.).
 
-  to create an animal resource:
+to create an animal resource:
 
-  ```
-    rails g resource Animal common_name latin_name animal_class
-    rails db:migrate
-  ```
+```
+  rails g resource Animal common_name latin_name animal_class
+  rails db:migrate
+```
 
-  created some seeds:
+created some seeds:
 
-  ```ruby
-  animals =
-  [
-    {
-      common_name: "Arctic Fox",
-      latin_name: "Alopex Vulpini",
-      animal_class: "mammal"
-    },
-    {
-      common_name: "Ladybird Beetle",
-      latin_name: "Coccinella magnifica",
-      animal_class: "insect"
-    },
-    {
-      common_name: "Banana Slug",
-      latin_name: "Ariolimax californicus",
-      animal_class: "gastropod"
-    },
-  ]
+```ruby
+animals =
+[
+  {
+    common_name: "Arctic Fox",
+    latin_name: "Alopex Vulpini",
+    animal_class: "mammal"
+  },
+  {
+    common_name: "Ladybird Beetle",
+    latin_name: "Coccinella magnifica",
+    animal_class: "insect"
+  },
+  {
+    common_name: "Banana Slug",
+    latin_name: "Ariolimax californicus",
+    animal_class: "gastropod"
+  },
+]
 
-  animals.each do |animal|
-    Animal.create animal
-  end
-  ```
+animals.each do |animal|
+  Animal.create animal
+end
+```
 
 - **Story**: As the consumer of the API I can see all the animals in the database.
-  - _Hint_: Make a few animals using Rails Console
+
+two methods in the controller:
+
+```ruby
+
+def index
+    animals = Animal.all
+    render json: animals
+  end
+
+  def show
+    animal = Animal.find(params[:id])
+    render json: animal
+  end
+
+
+```
+
 - **Story**: As the consumer of the API I can update an animal in the database.
 - **Story**: As the consumer of the API I can destroy an animal in the database.
 - **Story**: As the consumer of the API I can create a new animal in the database.
