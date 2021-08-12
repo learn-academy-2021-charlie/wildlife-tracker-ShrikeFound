@@ -14,7 +14,7 @@ class AnimalsController < ApplicationController
   end
 
   def update
-    #this is for the PUT/PATCH 'animals/"id' route
+    #this is for the PUT/PATCH '/animals/"id' route
     animal = Animal.find(params[:id])
     if animal.update(animal_params)
       render json: animal
@@ -25,6 +25,11 @@ class AnimalsController < ApplicationController
 
 
   def destroy
+    #this is for the DELETE '/animals/:id' route
+    animal = Animal.find(params[:id])
+    animal.destroy
+    #return nothing
+    head :no_content
   end
 
 
