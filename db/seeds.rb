@@ -8,7 +8,8 @@
 
 Animal.destroy_all
 
-animals = [
+animals = 
+[
   {
     common_name: "Arctic Fox",
     latin_name: "Alopex Vulpini",
@@ -24,11 +25,10 @@ animals = [
     latin_name: "Ariolimax californicus",
     animal_class: "gastropod"
   },
-
-
-
 ]
 
 animals.each do |animal|
   Animal.create animal
 end
+
+##TODO: add some animal sightings to seed.
