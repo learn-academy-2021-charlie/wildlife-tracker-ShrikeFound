@@ -84,6 +84,18 @@ end
 ```
 
 - **Story**: As the consumer of the API I can destroy an animal in the database.
+
+```ruby
+  def destroy
+    #this is for the DELETE '/animals/:id' route
+    animal = Animal.find(params[:id])
+    animal.destroy
+    #return nothing
+    head :no_content
+  end
+
+```
+
 - **Story**: As the consumer of the API I can create a new animal in the database.
 - **Story**: As the consumer of the API I can create a sighting of an animal with date (use the _datetime_ datatype), a latitude, and a longitude.
   - _Hint_: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
