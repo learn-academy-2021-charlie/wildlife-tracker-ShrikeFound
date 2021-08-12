@@ -113,6 +113,44 @@ end
 
 - **Story**: As the consumer of the API I can create a sighting of an animal with date (use the _datetime_ datatype), a latitude, and a longitude.
   - _Hint_: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
+
+to created a sighting resource:
+
+```
+rails g resource Sighting animal_id:integer latitude:decimal longitude:decimal
+```
+
+google maps says we should make the floats a certain precision and scale. I don't think we'll need that for this but for practice I added them to the migration:
+
+```ruby
+class CreateSightings < ActiveRecord::Migration[6.1]
+  def change
+    create_table :sightings do |t|
+      t.integer :animal_id
+      t.decimal :latitude, :precision=>10, :scale=>6
+      t.decimal :longitude, :precision=>10, :scale=>6
+
+      t.timestamps
+    end
+  end
+end
+
+```
+
+also added relationships to the models:
+
+```ruby
+class Animal < ApplicationRecord
+  has_many :sightings
+end
+```
+
+```ruby
+class Sighting < ApplicationRecord
+  belong_to :animal
+end
+```
+
 - **Story**: As the consumer of the API I can update an animal sighting in the database.
 - **Story**: As the consumer of the API I can destroy an animal sighting in the database.
 - **Story**: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
