@@ -1,3 +1,7 @@
+### Last user storie I was working on:
+
+- **Story**: As the consumer, I want to see a status code of 422 when a post request can not be completed because of validation errors.
+
 ## The API Stories
 
 The Forest Service is considering a proposal to place in conservancy a forest of virgin Douglas fir just outside of Portland, Oregon. Before they give the go-ahead, they need to do an environmental impact study. They've asked you to build an API the rangers can use to report wildlife sightings.
